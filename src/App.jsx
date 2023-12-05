@@ -1,10 +1,11 @@
 import Card from "./components/Card"
 import InputLabel from "./components/InputLabel"
 import Resume from "./components/resume";
-import Button from "./components/button"
+import Button from "./components/Button"
 import { v4 as uuidv4 } from 'uuid';
 import './styles/app.css'
 import { useState } from "react";
+import EduSection from "./components/EduSection";
 
 let initialValues = {
   firstLast: "",
@@ -17,6 +18,7 @@ let initialValues = {
   endEdu: "",
   locationEdu: ""
 }
+
 
 function App() {
 
@@ -58,6 +60,21 @@ function App() {
     setData({...data, locationEdu: event.target.value})
   } 
 
+  const [education, setEdu] = useState([])
+
+  const onClickFunction = () => {
+    let test = {...data}
+    let placeHolder = <EduSection school={test.school} locationEdu={data.locationEdu} degree={data.degree} startEdu={data.startEdu} endEdu={data.endEdu} key={uuidv4()} />
+    let newArray = education
+    newArray.push(placeHolder)
+    setEdu(newArray)
+    setData({school: null, locationEdu: null, degree: null, startEdu: null, endEdu: null})
+
+    console.log(data)
+}
+  const eduButton = <Button text='Save' click ={onClickFunction}/>
+
+
 
   let infoList = [<InputLabel label='First & Last Name' key = {'firstLast'} onChange={nameChange} propKey={'firstLast'} value={data["firstLast"]} />, 
                   <InputLabel label='Email' type='email' key = {'email'} onChange={emailChange} propKey={'email'} value={data["email"]} />,
@@ -76,13 +93,13 @@ function App() {
   return (
     <div className="flexContainer">
       <div>
-        <Card title='Personal Information' list={infoList}/>
-        <Card title='Education' list={eduList}/> 
+        <Card title='Personal Information' list={infoList} />
+        <Card title='Education' list={eduList} button={eduButton}/> 
         <Card title= 'Work Experience' list={expList} />
       
       </div>
       <div>
-        <Resume information = {data}/>
+        <Resume information = {data} save = {education} />
       </div>
     </div>
   )

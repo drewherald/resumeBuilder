@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 
 
-export default function Card({title, list, props}) {
+export default function Card({title, list, button}) {
 
   const [isActive, setActive] = useState(true)
 
@@ -21,8 +21,9 @@ export default function Card({title, list, props}) {
                 <h2>{title}</h2> <img src={isActive ? upArrow: downArrow} alt="" 
                 onClick={toggleClass} />
             </section>    
-            <form className={isActive ? null: 'none'}>
+            <form className={isActive ? 'active': 'none'}>
                 {list}
+                {button}
             </form>
         </div>
     </div>

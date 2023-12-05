@@ -1,8 +1,11 @@
+import '../styles/button.css'
 
-export default function Button(text) {
+export default function Button({text, click}) {
+
+
   return (
     <>
-        <button>
+        <button type='reset' onClick={click}>
             {text}
         </button>
     </>

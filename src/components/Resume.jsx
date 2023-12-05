@@ -1,6 +1,10 @@
 import '../styles/resume.css'
 
-export default function resume({information}) {
+
+
+
+
+export default function resume({information, save}) {
 
     let firstLast = information.firstLast
     let email = information.email
@@ -12,18 +16,22 @@ export default function resume({information}) {
     let endEdu = information.endEdu
     let locationEdu = information.locationEdu
 
-    
+    let checker = true
+
+    if(save[0]!=null){
+        checker= false
+    }else if(information.school!==""){
+        checker = false
+    }
 
   return (
     <div className='container'>
       <section className='header'>
         <h1 className='headText'>{firstLast}</h1>
         <p>{email} {tel == "" ? "":"||"} {tel} {address == "" ? "":"||"} {address}</p>
-       {/*} <h1>Drew Herald</h1>
-        <p>drewherald9@gmail.com || 859-317-1475 || 1417 Glenview Dr, Lexington KY 40514</p> {*/}
       </section>
       <section className='education'>
-        <h1 className='eduTitle'>{school == "" ? "":"Education"}</h1>
+        <h1 className='eduTitle'>{checker ? "":"Education"}</h1>
         <div className='eduText'>
             <div>
                 <p><b>{school}</b></p>
@@ -31,9 +39,11 @@ export default function resume({information}) {
                 <p>{degree}</p>
             </div>
             <div>
-                <p>{startEdu} {startEdu == "" ? "":"-"} {endEdu}</p>
+                <p>{startEdu} {startEdu == "" || startEdu == null ? null:"-"} {endEdu}</p>
             </div>
+            
         </div>
+        {...save}
       </section>
     </div>
   )
