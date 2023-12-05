@@ -1,6 +1,8 @@
 import '../styles/card.css'
 
-export default function Card({title, list}) {
+export default function Card({title, list, props}) {
+
+    
   return (
     <div className='cardBox'>
         <div>

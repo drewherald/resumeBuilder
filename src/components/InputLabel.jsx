@@ -1,23 +1,30 @@
-import { useState } from 'react';
 import '../styles/InputLabel.css'
+import { useState } from 'react'
+
+let initialValues = {
+    firstLast: " "
+  }
 
 
-export default function InputLabel({label, type='text'}) {
-    const [text, setText] = useState('');
+export default function InputLabel({label, type='text', onChange, value}) {
+
+    const [data, setData] = useState(initialValues)
   
-    function handleChange(e) {
-      setText(e.target.value);
+    const handleChange = (event) => {
+      setData({...data, firstLast: event.target.value})
     }
 
-  
+    console.log({value})
     return (
       <label>
         {label}
         {' '}
+        <input type="text" onChange={handleChange} value={data.firstLast || ""}/>
+        {console.log(data)}
         <input
-          value={text}
+          value={value}
           type = {type}
-          onChange={handleChange}
+          onChange={onChange}
           className='inputLabel'
         />
       </label>

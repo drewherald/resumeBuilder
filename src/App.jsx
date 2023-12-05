@@ -1,10 +1,26 @@
 import Card from "./components/Card"
 import InputLabel from "./components/InputLabel"
+import Resume from "./components/resume";
 import { v4 as uuidv4 } from 'uuid';
+import './styles/app.css'
+import { useState } from "react";
+
+let initialValues = {
+  firstLast: " "
+}
 
 function App() {
 
-  const infoList = [<InputLabel label='First & Last Name' key = {uuidv4()}/>, <InputLabel label='Email' type='email' key = {uuidv4()}/>,
+  const [data, setData] = useState(initialValues)
+  
+  const handleChange = (event) => {
+    setData({...data, [event.target.name]: event.target.value})
+  }
+
+  
+
+
+  let infoList = [<InputLabel label='First & Last Name' key = {uuidv4()} onChange={handleChange} defaultValue={data.firstLast} />, <InputLabel label='Email' type='email' key = {uuidv4()}/>,
               <InputLabel label='Phone Number' type='tel' key={uuidv4()} />, <InputLabel label='Address' key={uuidv4()} />]
   const eduList = [<InputLabel label='School' key = {uuidv4()}/>, <InputLabel label='Degree' key = {uuidv4()}/>,
               <InputLabel label='Start Date' key={uuidv4()} />, <InputLabel label='End Date' key={uuidv4()} />,
@@ -15,15 +31,17 @@ function App() {
               
 
   return (
-    <>
-      <Card title='Personal Information' list={infoList} />
-      <Card title='Education' list={eduList}/> 
-      <Card title= 'Work Experience' list={expList} />
-      {
-      /* 
-      <resume />
-      */}
-    </>
+    <div className="flexContainer">
+      <div>
+        <Card title='Personal Information' list={infoList} />
+        <Card title='Education' list={eduList}/> 
+        <Card title= 'Work Experience' list={expList} />
+      </div>
+      <div>
+        {data.content}
+        <Resume />
+      </div>
+    </div>
   )
 }
 
