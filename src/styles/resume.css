@@ -1,4 +1,29 @@
 .header{
     width: 100%;
     background-color: goldenrod;
+    min-width: 800px;
+    min-height: 100px;
+}
+
+.container{
+    padding: 10px 50px 0 50px;
+
+}
+
+.headText{
+    text-align: center;
+    padding-top: 15px;
+}
+
+.education{
+    padding: 0 20px 0 20px;
+}
+
+.header p{
+    text-align: center;
+}
+
+.eduText{
+    display: flex;
+    justify-content: space-between;
 }
