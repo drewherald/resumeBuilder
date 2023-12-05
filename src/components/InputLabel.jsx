@@ -6,7 +6,7 @@ let initialValues = {
   }
 
 
-export default function InputLabel({label, type='text', onChange, value}) {
+export default function InputLabel({label, type='text', onChange, value, propKey}) {
 
     const [data, setData] = useState(initialValues)
   
@@ -14,17 +14,14 @@ export default function InputLabel({label, type='text', onChange, value}) {
       setData({...data, firstLast: event.target.value})
     }
 
-    console.log({value})
+    console.log(data[propKey])
     return (
       <label>
         {label}
-        {' '}
-        <input type="text" onChange={handleChange} value={data.firstLast || ""}/>
-        {console.log(data)}
         <input
-          value={value}
+          value={data[propKey] || ""}
           type = {type}
-          onChange={onChange}
+          onChange={handleChange}
           className='inputLabel'
         />
       </label>
