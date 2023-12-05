@@ -1,28 +1,17 @@
 import '../styles/InputLabel.css'
-import { useState } from 'react'
-
-let initialValues = {
-    firstLast: " "
-  }
-
 
 export default function InputLabel({label, type='text', onChange, value, propKey}) {
 
-    const [data, setData] = useState(initialValues)
-  
-    const handleChange = (event) => {
-      setData({...data, firstLast: event.target.value})
-    }
-
-    console.log(data[propKey])
+    //console.log(data[propKey])
     return (
       <label>
         {label}
         <input
-          value={data[propKey] || ""}
+          defaultValue={value || ""}
           type = {type}
-          onChange={handleChange}
+          onChange={onChange}
           className='inputLabel'
+          key={propKey}
         />
       </label>
     );

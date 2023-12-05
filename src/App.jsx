@@ -13,14 +13,11 @@ function App() {
 
   const [data, setData] = useState(initialValues)
   
-  const handleChange = (event) => {
+  const nameChange = (event) => {
     setData({...data, firstLast: event.target.value})
   }
 
-  
-
-
-  let infoList = [<InputLabel label='First & Last Name' key = {uuidv4()} onChange={handleChange} value={data.firstLast} propKey = "firstLast"/>, <InputLabel label='Email' type='email' key = {uuidv4()}/>,
+  let infoList = [<InputLabel label='First & Last Name' key = {'firstLast'} onChange={nameChange} value={data["firstLast"]} propKey = "firstLast"/>, <InputLabel label='Email' type='email' key = {uuidv4()}/>,
               <InputLabel label='Phone Number' type='tel' key={uuidv4()} />, <InputLabel label='Address' key={uuidv4()} />]
   const eduList = [<InputLabel label='School' key = {uuidv4()}/>, <InputLabel label='Degree' key = {uuidv4()}/>,
               <InputLabel label='Start Date' key={uuidv4()} />, <InputLabel label='End Date' key={uuidv4()} />,
@@ -38,8 +35,7 @@ function App() {
         <Card title= 'Work Experience' list={expList} />
       </div>
       <div>
-        {data.content}
-        <Resume />
+        <Resume information = {data}/>
       </div>
     </div>
   )
