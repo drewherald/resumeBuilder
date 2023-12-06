@@ -1,4 +1,5 @@
 import '../styles/resume.css'
+import EduSection from './EduSection'
 
 
 
@@ -15,6 +16,12 @@ export default function resume({information, save}) {
     let startEdu = information.startEdu
     let endEdu = information.endEdu
     let locationEdu = information.locationEdu
+    let company = information.company
+    let position = information.position
+    let startExp = information.startExp
+    let endExp = information.endExp
+    let locationExp = information.locationExp
+    let description = information.description
 
     let checker = true
 
@@ -24,26 +31,18 @@ export default function resume({information, save}) {
         checker = false
     }
 
+
   return (
     <div className='container'>
       <section className='header'>
         <h1 className='headText'>{firstLast}</h1>
-        <p>{email} {tel == "" ? "":"||"} {tel} {address == "" ? "":"||"} {address}</p>
+        <p>{email} {tel == "" || tel == null ? "":"||"} {tel} {address == "" || address == null? "":"||"} {address}</p>
       </section>
       <section className='education'>
         <h1 className='eduTitle'>{checker ? "":"Education"}</h1>
-        <div className='eduText'>
-            <div>
-                <p><b>{school}</b></p>
-                <p>{locationEdu}</p>
-                <p>{degree}</p>
-            </div>
-            <div>
-                <p>{startEdu} {startEdu == "" || startEdu == null ? null:"-"} {endEdu}</p>
-            </div>
-            
-        </div>
         {...save}
+        <EduSection school={school} locationEdu={locationEdu} degree={degree} startEdu={startEdu} endEdu={endEdu} />
+        
       </section>
     </div>
   )

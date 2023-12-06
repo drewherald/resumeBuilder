@@ -13,10 +13,16 @@ let initialValues = {
   tel: "",
   address: "",
   school: "",
-  degree: "",
-  startEdu: "",
-  endEdu: "",
-  locationEdu: ""
+  degree: null,
+  startEdu: null,
+  endEdu: null,
+  locationEdu: null,
+  company: "",
+  position: null,
+  startExp: null,
+  endExp: null,
+  locationExp: null,
+  description: null
 }
 
 
@@ -60,17 +66,43 @@ function App() {
     setData({...data, locationEdu: event.target.value})
   } 
 
+  const companyChange = (event) => {
+    setData({...data, company: event.target.value})
+  } 
+
+  const positionChange = (event) => {
+    setData({...data, position: event.target.value})
+  } 
+
+  const startExpChange = (event) => {
+    setData({...data, startExp: event.target.value})
+  } 
+
+  const endExpChange = (event) => {
+    setData({...data, endExp: event.target.value})
+  } 
+
+  const locationExpChange = (event) => {
+    setData({...data, locationExp: event.target.value})
+  } 
+
+  const descriptionChange = (event) => {
+    setData({...data, description: event.target.value})
+  } 
+
+
+
   const [education, setEdu] = useState([])
 
   const onClickFunction = () => {
     let test = {...data}
+    if(test.school == null || test.locationEdu == null || test.degree == null || test.startEdu == null) return 
     let placeHolder = <EduSection school={test.school} locationEdu={data.locationEdu} degree={data.degree} startEdu={data.startEdu} endEdu={data.endEdu} key={uuidv4()} />
     let newArray = education
     newArray.push(placeHolder)
     setEdu(newArray)
     setData({school: null, locationEdu: null, degree: null, startEdu: null, endEdu: null})
-
-    console.log(data)
+    console.log(data.startEdu)
 }
   const eduButton = <Button text='Save' click ={onClickFunction}/>
 
@@ -85,9 +117,12 @@ function App() {
                     <InputLabel label='Start Date' key={'startEdu'} onChange={startEduChange} propKey={'startEdu'} value={data['startEdu']} />, 
                     <InputLabel label='End Date' key={'endEdu'} onChange={endEduChange} propKey={'endEdu'} value={data['endEdu']} />,
                     <InputLabel label='Location' key = {'locationEdu'} onChange={locationEduChange} propKey={'locationEdu'} value={data['locationEdu']} />]
-  const expList = [<InputLabel label='Company' key = {uuidv4()}/>, <InputLabel label='Position' key = {uuidv4()}/>,
-              <InputLabel label='Start Date' key={uuidv4()} />, <InputLabel label='End Date' key={uuidv4()} />,
-              <InputLabel label='Location' key = {uuidv4()}/>, <InputLabel label='Description' key = {uuidv4()}/>]
+  const expList = [<InputLabel label='Company' key = {'company'} onChange={companyChange} propKey={'company'} value={data['company']}/>, 
+                   <InputLabel label='Position' key = {'position'} onChange={positionChange} propKey={'position'} value={data['position']}/>,
+                   <InputLabel label='Start Date' key={'startExp'} onChange={startExpChange} propKey={'startExp'} value={data['startExp']} />, 
+                   <InputLabel label='End Date' key={'endExp'} onChange={endExpChange} propKey={'endExp'} value={data['endExp']} />,
+                   <InputLabel label='Location' key = {'locationExp'} onChange={locationExpChange} propKey={'locationExp'} value={data['locationExp']}/>, 
+                   <InputLabel label='Description' key = {'description'} onChange={descriptionChange} propKey={'description'} value={data['description']}/>]
               
 
   return (

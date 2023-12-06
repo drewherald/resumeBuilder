@@ -13,7 +13,7 @@ export default function EduSection({school, locationEdu, degree, startEdu, endEd
                 <p>{degree}</p>
             </div>
             <div>
-                <p>{startEdu} {startEdu == "" ? "":"-"} {endEdu}</p>
+                <p>{startEdu} {typeof startEdu == 'string' && startEdu != "" ? "-":null} {endEdu}</p>
             </div>
         </div>
     </>
