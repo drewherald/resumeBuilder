@@ -5,17 +5,21 @@ export default function EduSection({school, locationEdu, degree, startEdu, endEd
 
     
   return (
-    <>
+    
         <div className='eduText'>
-            <div>
+            <div className='flexChild'>
                 <p><b>{school}</b></p>
-                <p>{locationEdu}</p>
                 <p>{degree}</p>
             </div>
-            <div>
-                <p>{startEdu} {typeof startEdu == 'string' && startEdu != "" ? "-":null} {endEdu}</p>
+            <div className='flexChild'>
+                <p>
+                    {locationEdu}
+                </p>
+                <div>
+                    <p>{startEdu} {typeof startEdu == 'string' && startEdu != "" ? "-":null} {endEdu}</p>
+                </div>
             </div>
         </div>
-    </>
+    
   )
 }

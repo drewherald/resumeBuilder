@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import './styles/app.css'
 import { useState } from "react";
 import EduSection from "./components/EduSection";
+import ExpSection from "./components/ExpSection";
 
 let initialValues = {
   firstLast: "",
@@ -94,18 +95,30 @@ function App() {
 
   const [education, setEdu] = useState([])
 
-  const onClickFunction = () => {
+  const eduClickFunction = () => {
     let test = {...data}
     if(test.school == null || test.locationEdu == null || test.degree == null || test.startEdu == null) return 
     let placeHolder = <EduSection school={test.school} locationEdu={data.locationEdu} degree={data.degree} startEdu={data.startEdu} endEdu={data.endEdu} key={uuidv4()} />
     let newArray = education
     newArray.push(placeHolder)
     setEdu(newArray)
-    setData({school: null, locationEdu: null, degree: null, startEdu: null, endEdu: null})
+    setData({school: null, locationEdu: null, degree: null, startEdu: null, endEdu: null, firstLast: data.firstLast, email: data.email, tel:data.tel, address:data.address})
     console.log(data.startEdu)
 }
-  const eduButton = <Button text='Save' click ={onClickFunction}/>
+  const eduButton = <Button text='Save' click ={eduClickFunction}/>
 
+  const [experience, setExp] = useState([])
+
+  const expClickFunction = () => {
+    let test = {...data}
+    if(test.company == null || test.locationExp == null || test.position == null || test.startExp == null) return 
+    let placeHolder = <ExpSection company={test.company} locationExp={data.locationExp} position={data.position} startExp={data.startExp} endExp={data.endExp} description={data.description} key={uuidv4()} />
+    let newArray = experience
+    newArray.push(placeHolder)
+    setExp(newArray)
+    setData({position: null, locationExp: null, company: null, startExp: null, endExp: null, description: null, firstLast: data.firstLast, email: data.email, tel:data.tel, address:data.address})
+}
+  const expButton = <Button text='Save' click ={expClickFunction}/>
 
 
   let infoList = [<InputLabel label='First & Last Name' key = {'firstLast'} onChange={nameChange} propKey={'firstLast'} value={data["firstLast"]} />, 
@@ -130,11 +143,11 @@ function App() {
       <div>
         <Card title='Personal Information' list={infoList} />
         <Card title='Education' list={eduList} button={eduButton}/> 
-        <Card title= 'Work Experience' list={expList} />
+        <Card title= 'Work Experience' list={expList} button={expButton}/>
       
       </div>
       <div>
-        <Resume information = {data} save = {education} />
+        <Resume information = {data} save = {education} saveTwo = {experience} />
       </div>
     </div>
   )

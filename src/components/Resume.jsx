@@ -1,11 +1,12 @@
 import '../styles/resume.css'
 import EduSection from './EduSection'
+import ExpSection from './ExpSection'
 
 
 
 
 
-export default function resume({information, save}) {
+export default function resume({information, save, saveTwo}) {
 
     let firstLast = information.firstLast
     let email = information.email
@@ -25,12 +26,22 @@ export default function resume({information, save}) {
 
     let checker = true
 
-    if(save[0]!=null){
+    if(save[0]!=null && save[0]!=undefined){
         checker= false
-    }else if(information.school!==""){
+    }else if(information.school!=="" && information.school!==undefined){
         checker = false
     }
 
+    let saveTwoChecker = true
+
+    if(saveTwo[0]!=null && saveTwo[0]!= undefined){
+        saveTwoChecker = false
+    } else if(information.company!=="" && information.company!==undefined){
+        saveTwoChecker = false
+    }
+
+    console.log(firstLast)
+    console.log(information.company)
 
   return (
     <div className='container'>
@@ -41,8 +52,12 @@ export default function resume({information, save}) {
       <section className='education'>
         <h1 className='eduTitle'>{checker ? "":"Education"}</h1>
         {...save}
-        <EduSection school={school} locationEdu={locationEdu} degree={degree} startEdu={startEdu} endEdu={endEdu} />
-        
+        <EduSection school={school} locationEdu={locationEdu} degree={degree} startEdu={startEdu} endEdu={endEdu} />        
+      </section>
+      <section className='experience'>
+        <h1 className='eduTitle'>{saveTwoChecker ? "":"Work Experience"}</h1>
+        {...saveTwo}
+        <ExpSection company={company} position={position} startExp={startExp} endExp={endExp} locationExp={locationExp} description={description}/>
       </section>
     </div>
   )
