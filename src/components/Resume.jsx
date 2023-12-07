@@ -26,22 +26,28 @@ export default function resume({information, save, saveTwo}) {
 
     let checker = true
 
-    if(save[0]!=null && save[0]!=undefined){
-        checker= false
-    }else if(information.school!=="" && information.school!==undefined){
+    for(let i=0; i<save.length; i++){
+        if(typeof save[i] != 'string' || undefined){
+            checker = false
+        }
+    }
+    
+    if(information.school!=="" && information.school!==undefined){
         checker = false
     }
+    
 
     let saveTwoChecker = true
 
-    if(saveTwo[0]!=null && saveTwo[0]!= undefined){
-        saveTwoChecker = false
-    } else if(information.company!=="" && information.company!==undefined){
-        saveTwoChecker = false
+    for(let i=0; i<saveTwo.length; i++){
+        if(typeof saveTwo[i] != 'string' || undefined){
+            saveTwoChecker = false
+        }
     }
 
-    console.log(firstLast)
-    console.log(information.company)
+    if(information.company!=="" && information.company!==undefined){
+        saveTwoChecker = false
+    }
 
   return (
     <div className='container'>

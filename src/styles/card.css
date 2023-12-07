@@ -47,3 +47,16 @@ img{
 .active{
     position: relative;
 }
+
+.saveSect{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0 5px 0;
+    padding: 0 5px 0 5px;
+    background-color: lightgrey;
+}
+
+.none{
+    display: none;
+}

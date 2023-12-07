@@ -7,6 +7,7 @@ import './styles/app.css'
 import { useState } from "react";
 import EduSection from "./components/EduSection";
 import ExpSection from "./components/ExpSection";
+import SaveData from "./components/SaveData";
 
 let initialValues = {
   firstLast: "",
@@ -94,31 +95,69 @@ function App() {
 
 
   const [education, setEdu] = useState([])
+  const [educationData, setEduData] = useState([])
+
+  const clickSave = (count) => {
+    return function(){
+      let phold = education
+      phold.splice(count, 1, "")
+      setEdu(phold)
+      let phold2 = educationData
+      phold2[count][2] = false
+      setEduData(phold2)
+      setData({firstLast: data.firstLast})
+    }
+  }
+
 
   const eduClickFunction = () => {
     let test = {...data}
     if(test.school == null || test.locationEdu == null || test.degree == null || test.startEdu == null) return 
     let placeHolder = <EduSection school={test.school} locationEdu={data.locationEdu} degree={data.degree} startEdu={data.startEdu} endEdu={data.endEdu} key={uuidv4()} />
     let newArray = education
+    let count = education.length
     newArray.push(placeHolder)
     setEdu(newArray)
+    let saveItem = [test.school, clickSave(count), true]
+    let newSave = educationData
+    newSave.push(saveItem)
+    setEduData(newSave)
     setData({school: null, locationEdu: null, degree: null, startEdu: null, endEdu: null, firstLast: data.firstLast, email: data.email, tel:data.tel, address:data.address})
-    console.log(data.startEdu)
 }
-  const eduButton = <Button text='Save' click ={eduClickFunction}/>
+  const eduButton = <Button text='Save' click ={eduClickFunction} classID={'save'}/>
 
   const [experience, setExp] = useState([])
+  const [experienceData, setExpData] = useState([])
+
+  const clickSaveExp = (count) => {
+    return function(){
+      let phold = experience
+      phold.splice(count, 1, "")
+      setExp(phold)
+      let phold2 = experienceData
+      phold2[count][2] = false
+      setExpData(phold2)
+      setData({firstLast: data.firstLast})
+    }
+  }
 
   const expClickFunction = () => {
     let test = {...data}
     if(test.company == null || test.locationExp == null || test.position == null || test.startExp == null) return 
     let placeHolder = <ExpSection company={test.company} locationExp={data.locationExp} position={data.position} startExp={data.startExp} endExp={data.endExp} description={data.description} key={uuidv4()} />
     let newArray = experience
+    let count = experience.length
     newArray.push(placeHolder)
     setExp(newArray)
+    
+    let saveItem = [test.company, clickSaveExp(count), true]
+    let newSave = experienceData
+    newSave.push(saveItem)
+    setExpData(newSave)
+
     setData({position: null, locationExp: null, company: null, startExp: null, endExp: null, description: null, firstLast: data.firstLast, email: data.email, tel:data.tel, address:data.address})
 }
-  const expButton = <Button text='Save' click ={expClickFunction}/>
+  const expButton = <Button text='Save' click ={expClickFunction} classID={'save'}/>
 
 
   let infoList = [<InputLabel label='First & Last Name' key = {'firstLast'} onChange={nameChange} propKey={'firstLast'} value={data["firstLast"]} />, 
@@ -142,8 +181,8 @@ function App() {
     <div className="flexContainer">
       <div>
         <Card title='Personal Information' list={infoList} />
-        <Card title='Education' list={eduList} button={eduButton}/> 
-        <Card title= 'Work Experience' list={expList} button={expButton}/>
+        <Card title='Education' list={eduList} button={eduButton} save={educationData}/> 
+        <Card title= 'Work Experience' list={expList} button={expButton} save={experienceData}/>
       
       </div>
       <div>

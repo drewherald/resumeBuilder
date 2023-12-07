@@ -1,5 +1,9 @@
-button{
+.save{
     position: absolute;
     bottom: 0;
     right: 0;
+}
+
+.delete{
+    height: 40%;
 }
