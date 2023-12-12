@@ -1,6 +1,6 @@
 import Card from "./components/Card"
 import InputLabel from "./components/InputLabel"
-import Resume from "./components/resume";
+import Resume from "./components/Resume";
 import Button from "./components/Button"
 import { v4 as uuidv4 } from 'uuid';
 import './styles/app.css'
